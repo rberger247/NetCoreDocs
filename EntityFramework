@@ -1,1 +1,1 @@
-dotnet ef migrations add initialCreate -p /domain -s /API
+dotnet ef migrations add initialCreate -p domain/ -s API/
