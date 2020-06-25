@@ -2,3 +2,15 @@ dotnet ef migrations add initialCreate -p domain/ -s API/
 
 --Connection String in MVC Core
 "Data Source=.\\sqlexpress;Initial Catalog= KoolKids;Integrated Security=True"
+
+in startup.cs 
+ --configureService method 
+             services.AddDbContext<SchoolContext>(options =>
+    options.UseSqlServer(Configuration.GetConnectionString("DevConnection")));
+    
+   --configure Method 
+    using (var serviceScope = app.ApplicationServices.GetService<IServiceScopeFactory>().CreateScope())
+            {
+                var context = serviceScope.ServiceProvider.GetRequiredService<SchoolContext>();
+                context.Database.Migrate();
+            }
